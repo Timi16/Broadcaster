@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, maximum-scale=1.0">
+    <title>log in</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;1,100;1,300;1,400;1,500;1,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="Authentication.css">
+    <style>
+        body, html{
+            font-family: roboto, sans-serif;
+        }
+        .loading-page{
+            width: 100%;
+            height: 100vh;
+            display: none; 
+            align-items: center;
+            justify-content: center;
+            background-color: rgba(147, 147, 147, 0.399);
+            position: absolute;
+        }
+        /* HTML: <div class="loader"></div> */
+        .loader {
+        width: 50px;
+        aspect-ratio: 1;
+        border-radius: 50%;
+        border: 8px solid;
+        border-color: #000 #0000;
+        animation: l1 1s infinite;
+        }
+        @keyframes l1 {to{transform: rotate(.5turn)}}
+        #eyeIcon{
+            position: absolute;
+            right: 1rem;
+            top: 13.4rem;
+            fill: rgba(143, 140, 140, 0);
+            stroke: rgb(73, 73, 73);
+        }
+    </style>
+</head>
+<body>
+    <div class="loading-page">
+        <div class="loader"></div>
+    </div>
+    <div class="login">
+        <div id="header-contents-login">
+            <a href="home.html">
+                <svg class="out-line" id="Outline" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20"><g id="_01_align_center" data-name="01 align center">
+                    <path d="M16.752,23.994,6.879,14.121a3,3,0,0,1,0-4.242L16.746.012,18.16,1.426,8.293,11.293a1,1,0,0,0,0,1.414l9.873,9.873Z"/></g>
+                </svg>
+            </a>
+            <h1 class="header-text-login">Log in</h1>
+        </div>
+        <form onsubmit="loginUser(event)">
+            <div class="email-page">
+                <p>Email?</p>
+                <input type="email" class="email-input" id="email-input">
+            </div>
+            <div class="email-page">
+                <p>Password?</p>
+                <input type="password" id="password">
+                <span class="toggle-password" id="togglePassword">
+                    <svg id="eyeIcon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0zm7.029-2.41a1.001 1.001 0 00-.116-1.31C18.368 5.665 14.932 4 12 4S5.632 5.665 2.087 8.28a1.001 1.001 0 00-.116 1.31C5.632 13.335 9.068 15 12 15s6.368-1.665 9.913-4.28z"/>
+                    </svg>
+                </span>
+                <a class="password-recovery-link recover-password" href="password.html">forgotten Password?</a>
+            </div>
+            
+            <div class="next-button">
+                <button type="submit">Log in</button>
+            </div>
+            <div class="message" id="message"></div>
+        </form>
+   <script>
+    async function loginUser(event) {
+    event.preventDefault();
+    const email = document.getElementById("email-input").value;
+    const password = document.getElementById("password").value;
+    const message = document.getElementById('message');
+    const loadingSpinner = document.querySelector('.loading-page');
+
+    // Show the loader
+    loadingSpinner.style.display = 'flex';
+
+    try {
+        const response = await fetch('https://trends-s5yl.onrender.com/api/login', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({email, password})
+        });
+
+        if (response.ok) {
+            const data = await response.json();
+            localStorage.setItem('token', data.token);
+            localStorage.setItem('username', data.username);
+            window.location.href = "home.html";
+        } else {
+            const errorData = await response.json();
+            message.style.color = 'black';
+            message.textContent = "Check you email or password";
+        }
+        } catch (error) {
+            console.error("network error", error);
+            message.style.color = 'black';
+            message.textContent = 'Network Error: ' + error.message;
+        } finally {
+            // Hide the loader
+            loadingSpinner.style.display = 'none';
+        }
+    }
+    const passwordField = document.getElementById('password');
+    const togglePassword = document.getElementById('togglePassword');
+    const eyeIcon = document.getElementById('eyeIcon');
+
+    togglePassword.addEventListener('click', function () {
+        const type = passwordField.type === 'password' ? 'text' : 'password';
+        passwordField.type = type;
+
+        // Toggle the eye icon
+        if (type === 'password') {
+            eyeIcon.innerHTML = '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0zm7.029-2.41a1.001 1.001 0 00-.116-1.31C18.368 5.665 14.932 4 12 4S5.632 5.665 2.087 8.28a1.001 1.001 0 00-.116 1.31C5.632 13.335 9.068 15 12 15s6.368-1.665 9.913-4.28z"/>';
+        } else {
+            eyeIcon.innerHTML = '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0zm-3 2.938c1.165 0 2.29-.228 3.309-.66.17.404.273.845.273 1.302 0 2.21-3.134 4-7 4s-7-1.79-7-4c0-.457.103-.898.273-1.302C5.71 14.71 6.835 14.938 8 14.938c1.165 0 2.29-.228 3.309-.66a5.48 5.48 0 003.691 0c.378.156.779.266 1.191.34.106.017.213.027.32.03z"/>';
+        }
+    });
+
+</script>
+</body>
+</html>

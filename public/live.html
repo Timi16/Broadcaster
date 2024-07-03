@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, maximum-scale=1.0">
+    <title>Document</title>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"></script>
+    <script src='index.js'></script>
+    <script src="commenting.js"></script>
+    <link rel="stylesheet" href="livestream.css">
+</head>
+<body>
+    <main>
+        <div class="main-live-page">
+            <video autoplay muted id="video"></video>
+            <div class="top-stats">
+                <p class="live-icon">Live</p>
+                <div class="number-of-viewers">
+                    <svg aria-label="Home" class="home-icon" fill="none"  role="img" viewBox="0 0 24 24"><title>Home</title>
+                        <path d="M9.005 16.545a2.997 2.997 0 0 1 2.997-2.997A2.997 2.997 0 0 1 15 16.545V22h7V11.543L12 2 2 11.543V22h7.005Z" stroke="currentColor" stroke-linejoin="round" stroke-width="1.5"></path>
+                    </svg>
+                    <p>200</p>
+                </div>
+            </div>
+
+
+
+            <div class="lower-contents">
+                <div id="commentsList"></div>
+                <div class="comment-layout">
+                    <div class="commenting-section">
+                        <input type="text" placeholder="Type to comment....." id="commentInput">
+                        <button onclick="addComment()">
+                            <svg aria-label="Home" class="home-icon" id="sendMessage" fill="none"  role="img" viewBox="0 0 24 24">
+                                <path d="M9.005 16.545a2.997 2.997 0 0 1 2.997-2.997A2.997 2.997 0 0 1 15 16.545V22h7V11.543L12 2 2 11.543V22h7.005Z" stroke="currentColor" stroke-linejoin="round" stroke-width="1.5"></path>
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="element-container">
+                        <svg aria-label="Home" class="home-icon" fill="none"  role="img" viewBox="0 0 24 24"><title>Home</title>
+                            <path d="M9.005 16.545a2.997 2.997 0 0 1 2.997-2.997A2.997 2.997 0 0 1 15 16.545V22h7V11.543L12 2 2 11.543V22h7.005Z" stroke="currentColor" stroke-linejoin="round" stroke-width="1.5"></path>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+           
+
+
+            <div class="icon-elements">
+                <div class="element-container">
+                    <svg aria-label="Home" class="home-icon" fill="none"  role="img" viewBox="0 0 24 24"><title>Home</title>
+                        <path d="M9.005 16.545a2.997 2.997 0 0 1 2.997-2.997A2.997 2.997 0 0 1 15 16.545V22h7V11.543L12 2 2 11.543V22h7.005Z" stroke="currentColor" stroke-linejoin="round" stroke-width="1.5"></path>
+                    </svg>
+                </div>
+                <div class="element-container">
+                    <svg aria-label="Home" class="home-icon" fill="none"  role="img" viewBox="0 0 24 24"><title>Home</title>
+                        <path d="M9.005 16.545a2.997 2.997 0 0 1 2.997-2.997A2.997 2.997 0 0 1 15 16.545V22h7V11.543L12 2 2 11.543V22h7.005Z" stroke="currentColor" stroke-linejoin="round" stroke-width="1.5"></path>
+                    </svg>
+                </div>
+                <div class="element-container">
+                    <svg aria-label="Home" class="home-icon" fill="none"  role="img" viewBox="0 0 24 24"><title>Home</title>
+                        <path d="M9.005 16.545a2.997 2.997 0 0 1 2.997-2.997A2.997 2.997 0 0 1 15 16.545V22h7V11.543L12 2 2 11.543V22h7.005Z" stroke="currentColor" stroke-linejoin="round" stroke-width="1.5"></path>
+                    </svg>
+                </div>
+            </div>
+            <div class="popup-livestream-container">
+                <div class="popup-livestream">
+                    <button id='my-button'>Start Live</button>
+                </div>
+            </div>
+
+            <div class="call-to-buy">
+                <div class="call-to-buy-popup">
+                    <div class="imgage"></div>
+                    <p>qfhjkjhl;/kj"L:lhkhkkh</p>
+                    <svg aria-label="Home" class="home-icon" fill="none"  role="img" viewBox="0 0 24 24"><title>Home</title>
+                        <path d="M9.005 16.545a2.997 2.997 0 0 1 2.997-2.997A2.997 2.997 0 0 1 15 16.545V22h7V11.543L12 2 2 11.543V22h7.005Z" stroke="currentColor" stroke-linejoin="round" stroke-width="1.5"></path>
+                    </svg>
+                </div>
+            </div>
+        </div>
+    </main>
+
+
+
+
+
+
+
+
+    <script src="/socket.io/socket.io.js"></script>
+</body>
+</html>
