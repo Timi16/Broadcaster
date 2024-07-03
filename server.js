@@ -35,7 +35,7 @@ mongoose.connect("mongodb+srv://Admin:admin12345@atlascluster.am2nbgm.mongodb.ne
   app.use(express.static('public'));
   app.use(bodyParser.json());
   app.use(bodyParser.urlencoded({ extended: true }));
-  
+  app.use("/api",userRoutes);
   // Handle incoming POST requests for consumer endpoint
   app.post("/consumer", async (req, res) => {
       const peer = new webrtc.RTCPeerConnection({
